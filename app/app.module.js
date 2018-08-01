@@ -3,6 +3,7 @@ import uiRouter from 'angular-ui-router';
 import ngRedux from 'ng-redux';
 
 import AppComponent from './app.component';
+import PostViewComponent from './components/post.component';
 import config from './app.config';
 
 export default angular.module('app', [
@@ -11,4 +12,5 @@ export default angular.module('app', [
 ])
     .config(config)
     .component('interviewApp', AppComponent)
+    .component('postView', PostViewComponent)
     .name;

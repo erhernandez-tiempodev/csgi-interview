@@ -1,9 +1,38 @@
 <div class="container">
-    <h1>CSGI Challenge</h1>
-    <button class="btn btn-primary" type="button" ng-click="$ctrl.retrievePosts()">Retrieve Posts</button>
-    <div>
-        <ul>
-            <li ng-repeat="post in $ctrl.state.postsList track by post.id">{{post.title}}</li>
-        </ul>
+    <h1>CSGI Challenge test</h1>
+
+    <nav class="navbar navbar-light bg-light">
+        <button class="btn btn-secondary" type="button" ng-click="$ctrl.toggleAddPost()">{{$ctrl.$scope.showAddPost ? 'Hide': 'Add new post'}}</button>
+        <div class="loading" ng-show="$ctrl.state.isFetching"></div>
+    </nav>
+
+    <post-view ng-show="$ctrl.$scope.showAddPost"></post-view>
+
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Body</th>
+                    <th scope="col">Is in database?</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="post in $ctrl.state.postsList track by post.id">
+                    <th scope="row">{{post.id}}</th>
+                    <td>{{post.title}}</td>
+                    <td>{{post.author}}</td>
+                    <td>{{post.body}}</td>
+                    <td>{{!post.pendingSave}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+
+    <nav class="navbar navbar-light bg-light">
+        <button class="btn btn-outline-success" type="button" ng-click="$ctrl.savePostToDb()">Save List</button>
+        <div class="loading" ng-show="$ctrl.state.isFetching"></div>
+    </nav>
 </div>
